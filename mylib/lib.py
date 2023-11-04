@@ -2,7 +2,6 @@
 import os
 import requests
 from pyspark.sql import SparkSession
-from pyspark.sql.functions import when, col
 
 from pyspark.sql.types import (
      StructType, 
@@ -49,8 +48,6 @@ def load(spark, data="dataset/wc-20140609-140000.csv", name="WorldCupPredictions
     return df
 
 def describe(df):
-    summary_stats_str = df.describe().toPandas().to_markdown()
-
     return df.describe().show()
 
 def group_win_prob_query(df, name): 
@@ -61,14 +58,5 @@ def group_win_prob_query(df, name):
     return group_win_prob.show()
 
 def transform(df):
-    # conditions = [
-    #     (col("country") == "USA")
-    # ]
-
-    # categories = ["g"]
-
-    # df = df.withColumn("country", when(
-    #     conditions[0], categories[0]
-    #     ).when(conditions[1], categories[1]).otherwise("Other"))
     USA = df.filter(df["country"] == "USA")
     return USA.show()
