@@ -54,7 +54,11 @@ def group_win_prob_query(df, name):
     """queries using spark sql"""
     spark = SparkSession.builder.appName("WorldCupPredictions").getOrCreate()
     df = df.createOrReplaceTempView(name)
-    group_win_prob = spark.sql("SELECT group, AVG(spi) AS avg_soccer_power_in_group, COUNT(win) AS win_possibility FROM world_cup_data GROUP BY group")
+    group_win_prob = spark.sql("""SELECT group, 
+                               AVG(spi) AS avg_soccer_power_in_group, 
+                               COUNT(win) AS win_possibility 
+                               FROM world_cup_data 
+                               GROUP BY group""")
     return group_win_prob.show()
 
 def transform(df):
