@@ -3,6 +3,7 @@ Test goes here
 
 """
 import os
+import pytest
 from mylib.lib import (
     extract,
     load,
@@ -12,6 +13,11 @@ from mylib.lib import (
 )
 from pyspark.sql import SparkSession
 
+@pytest.fixture(scope="module")
+def spark():
+    spark = SparkSession.builder.appName("WorldCupPredictions").getOrCreate()
+    yield spark
+    spark.stop()
 
 def test_extract():
     file_path = extract()
@@ -43,10 +49,9 @@ def test_transform(spark):
 
 
 if __name__ == "__main__":
-    spark = SparkSession.builder.appName("WorldCupPredictions").getOrCreate()
+    #pytest.main(["-v", "test_main.py"])
     test_extract()
     test_load(spark)
     test_describe(spark)
     test_query(spark)
     test_transform(spark)
-    spark.stop()
