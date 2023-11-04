@@ -26,6 +26,10 @@ Important files:
 
 ![Alt text](test.png)
 
+### Basic information of my dataset:
+
+![Alt text](Describe.png)
+
 ### Query and Result:
 Here is my query:
 
@@ -37,7 +41,7 @@ SELECT group,
                                GROUP BY group
 ```
 * Explanation:
-The purpose is to find out each group's possibility to win the cup base on the prediction of Jun.9th. Hence, I group them by the group of world cup, sum the possibility of win for all teams in the group and ordered by the possibility of Jun.9th.
+The purpose is to find out each group's possibility to win the cup base on the prediction of Jun.9th and show their average soccer power. Hence, I group them by the group of world cup, sum the possibility of win for all teams in the group and ordered by the possibility of Jun.9th.
 
 * Expected result:
 
@@ -57,9 +61,7 @@ The purpose is to practice the `filter` transformation to filter the dataset to 
 
 ![Alt text](transformation.png)
 
-## References
 
-![1 1-function-essence-of-programming](https://github.com/nogibjj/python-ruff-template/assets/58792/f7f33cd3-cff5-4014-98ea-09b6a29c7557)
 
 
 
