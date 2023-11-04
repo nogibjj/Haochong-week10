@@ -49,3 +49,4 @@ if __name__ == "__main__":
     test_describe(spark)
     test_query(spark)
     test_transform(spark)
+    spark.stop()
