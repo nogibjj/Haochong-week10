@@ -1,33 +1,61 @@
-[![CI](https://github.com/nogibjj/python-ruff-template/actions/workflows/cicd.yml/badge.svg)](https://github.com/nogibjj/python-ruff-template/actions/workflows/cicd.yml)
-## Template for Python projects with RUFF linter
+# Haochong-week10-mini-repo [![CI](https://github.com/nogibjj/Haochong-week10/actions/workflows/cicd.yml/badge.svg)](https://github.com/nogibjj/Haochong-week10/actions/workflows/cicd.yml)
+This is a repo template for course 706_Data_Engineering Week 10 Mini Project. I use a datset about the prediction of the world cup. First of all, I define functions called `extract` to get data from url. Then, use `load` to load data. After that, I use `describe` to show the basic information of my dataset. Then, I create afunction called `group_win_prob_query` and `transform` to fulfill our requirement. Consequently, I use `main.py` to use my function in `lib.py`, and use `test_main.py` to test my `main.py`. Finally, I use Action to run `Makefile` and got a 100% pass. 
 
-![1 15_rust_built_python_tools](https://github.com/nogibjj/python-ruff-template/assets/58792/db5f7bda-a977-4c67-acbe-a70fe034fbdf)
+Important files:
+* `lib.py`
+* `main.py`
+* `dataset`
+* `test_main.py`
+
+# Purpose
+- Use PySpark to perform data processing on a large dataset
+- Include at least one Spark SQL query and one data transformation
 
 
+## Preparation 
+1. Open codespaces and vscode
+2. Wait for container to be built with requiremnts.txt installed
 
-1. First thing to do on launch is to open a new shell and verify virtualenv is sourced.
 
-Things included are:
+## Check format and test errors
+1. Format code with Python black by using `make format`
 
-* `Makefile`
+2. Lint code with Ruff by using `make lint`. 
 
-* `Pytest`
+3. Test code by using `make test`
 
-* `pandas`
+![Alt text](test.png)
 
-* `Ruff`:  
+### Query and Result:
+Here is my query:
 
-Run `make lint` which runs `ruff check`.  You can find out more info on [Ruff here](https://github.com/astral-sh/ruff).
+```
+SELECT group, 
+                               AVG(spi) AS avg_soccer_power_in_group, 
+                               COUNT(win) AS win_possibility 
+                               FROM world_cup_data 
+                               GROUP BY group
+```
+* Explanation:
+The purpose is to find out each group's possibility to win the cup base on the prediction of Jun.9th. Hence, I group them by the group of world cup, sum the possibility of win for all teams in the group and ordered by the possibility of Jun.9th.
 
-* `Dockerfile`
+* Expected result:
 
-* `GitHub copilot`
+![Alt text](query.png)
 
-* `jupyter` and `ipython` 
+### Transformation and Result:
+Here is my transformation:
 
-* A base set of libraries for devops and web
+```
+df.filter(df["country"] == "USA")
+```
 
-* `githubactions`
+* Explanation:
+The purpose is to practice the `filter` transformation to filter the dataset to include only row where the `country` is "USA".
+
+* Expected result:
+
+![Alt text](transformation.png)
 
 ## References
 
